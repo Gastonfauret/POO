@@ -1,14 +1,14 @@
-class Auto {
-    private marca: string;
-    private modelo: string;
-    private motor: number;
-    constructor(marca: string, modelo: string, motor: number) {
-        this.marca = marca
-        this.modelo = modelo
-        this.motor = motor        
+class Car {
+    private brand: string;
+    private model: string;
+    private engine: number;
+    constructor(brand: string, model: string, engine: number) {
+        this.brand = brand
+        this.model = model
+        this.engine = engine       
     }
-    contacto() {
-        console.log('El Auto esta encendido.');        
+    powerOn() {
+        console.log('El Auto esta contacto.');        
         return (this.radio());              
     }    
     radio() {
@@ -16,9 +16,9 @@ class Auto {
     }
 }
 
-const auto1 = new Auto('Fiat', 'Palio', 1.4)
-console.log(auto1);
-console.log(auto1.contacto()); 
+const car1 = new Car('Fiat', 'Palio', 1.4)
+console.log(car1);
+console.log(car1.powerOn()); 
 
 
 

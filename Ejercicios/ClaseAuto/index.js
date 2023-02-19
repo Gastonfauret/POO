@@ -1,21 +1,18 @@
-var Auto = /** @class */ (function () {
-    function Auto(marca, modelo, motor) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.motor = motor;
+var Car = /** @class */ (function () {
+    function Car(brand, model, engine) {
+        this.brand = brand;
+        this.model = model;
+        this.engine = engine;
     }
-    Auto.prototype.contacto = function () {
-        console.log('El Auto esta encendido');
+    Car.prototype.powerOn = function () {
+        console.log('El Auto esta contacto.');
         return (this.radio());
     };
-    Auto.prototype.radio = function () {
+    Car.prototype.radio = function () {
         return 'La Radio esta Encendida.';
     };
-    return Auto;
+    return Car;
 }());
-var auto1 = new Auto('Fiat', 'Palio', 1.4);
-console.log(auto1);
-console.log(auto1.contacto());
-var auto2 = new Auto('Fiat', 'Siena', 1.4);
-console.log(auto2);
-console.log(auto2.contacto());
+var car1 = new Car('Fiat', 'Palio', 1.4);
+console.log(car1);
+console.log(car1.powerOn());
