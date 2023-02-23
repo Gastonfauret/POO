@@ -25,24 +25,25 @@ class Car {
     }
 
     driving() {
-        if (this.gear >= 0 && this.gear <= 5) {
-            this.gear += 1
-            console.log('Gear position: ' + this.gear);
+        if (this.gear >= 0 && this.gear < 5 && this.speed <= 100) {
+            this.gear++
+            console.log(`Gear: ${this.gear}`);
             this.speed += 20;
-            return 'Speed: ' + this.speed  + ' MPH';
-            }
+            return `Speed: ${this.speed} MPH`            
+        } 
         else {
             this.gear = 5
-            console.log('Gear position: 5');
-            return 'Speed: ' + this.speed  + ' MPH.' + 'You have reached the maximum speed limit.';
-        	}
-        }            
+            console.log(`Gear: ${this.gear}`);
+            this.speed += 20;
+            return `Speed: ${this.speed} MPH. You have reached the maximus speed limit.`            
+        }
+    }            
 
     brake() {
         this.gear--
-        console.log('Gear position: ' + this.gear);
+        console.log(`Gear position: ${this.gear}`);
         this.speed -= 20 
-        return 'Speed: ' + this.speed  + ' MPH'
+        return `Speed: ${this.speed} MPH`
     }
 
     reverse() {
@@ -74,7 +75,33 @@ console.log(car1.driving());
 console.log(car1.driving()); 
 console.log(car1.driving());
 console.log(car1.driving());
+console.log(car1.driving());
+console.log(car1.driving());
+console.log(car1.brake()); 
+console.log(car1.brake());
 console.log(car1.engineOff()); 
+
+const car2 = new Car('Chevrolet', 'Onix', 1.3)
+console.log(car2);
+console.log(car2.powerOn()); 
+console.log(car2.driving()); 
+console.log(car2.driving()); 
+console.log(car2.driving()); 
+console.log(car2.brake()); 
+console.log(car2.brake());
+console.log(car2.reverse());
+console.log(car2.reverse());
+console.log(car2.driving()); 
+console.log(car2.driving()); 
+console.log(car2.driving()); 
+console.log(car2.driving()); 
+console.log(car2.driving());
+console.log(car2.driving());
+console.log(car2.driving());
+console.log(car2.driving());
+console.log(car2.brake()); 
+console.log(car2.brake());
+console.log(car2.engineOff()); 
 
 
 
