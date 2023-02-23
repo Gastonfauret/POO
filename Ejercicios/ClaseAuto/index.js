@@ -18,7 +18,7 @@ var Car = /** @class */ (function () {
         return 'The engine is running. You can drive now';
     };
     Car.prototype.driving = function () {
-        if (this.gear < 6) {
+        if (this.gear >= 0 && this.gear <= 5) {
             this.gear += 1;
             console.log('Gear position: ' + this.gear);
             this.speed += 20;

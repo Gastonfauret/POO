@@ -25,7 +25,7 @@ class Car {
     }
 
     driving() {
-        if () {
+        if (this.gear >= 0 && this.gear <= 5) {
             this.gear += 1
             console.log('Gear position: ' + this.gear);
             this.speed += 20;
