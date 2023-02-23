@@ -6,25 +6,25 @@ class Car {
     private gear: number = 0;
     
     constructor(brand: string, model: string, engine: number) {
-        this.brand = brand
-        this.model = model
-        this.engine = engine       
+        this.brand = brand;
+        this.model = model;
+        this.engine = engine;     
     }
-    powerOn() {
+    powerOn(): String {
         console.log('Power On'); 
         console.log(this.radio());       
         return this.engineOn();              
     }
 
-    radio() {
+    radio(): String {
         return 'The radio is playing.';        
     }
 
-    engineOn() {
+    engineOn(): String {
         return 'The engine is running. You can drive now';
     }
 
-    driving() {
+    driving(): String {
         if (this.gear >= 0 && this.gear < 5 && this.speed <= 100) {
             this.gear++
             console.log(`Gear: ${this.gear}`);
@@ -39,20 +39,20 @@ class Car {
         }
     }            
 
-    brake() {
+    brake(): String {
         this.gear--
         console.log(`Gear position: ${this.gear}`);
         this.speed -= 20 
         return `Speed: ${this.speed} MPH`
     }
 
-    reverse() {
+    reverse(): String {
         this.gear = 0
         this.speed = 0
         return 'The reverse position is on.'
     }
 
-    engineOff() {
+    engineOff(): String {
         this.gear = 0
         this.speed = 0
         return 'The Car Engine and the Power is Off'
