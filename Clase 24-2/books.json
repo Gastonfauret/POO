@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Carrie",
+        "author": "Stephen King",
+        "gender": "Horror",
+        "pages": 250
+    },
+    {
+        "title": "The Raven",
+        "author": "Edgar Alan Poe",
+        "gender": "Horror",
+        "pages": 12
+    },
+    {
+        "title": "The Call of Cthutulu",
+        "author": "H. P. Lovecraft",
+        "gender": "Horror",
+        "pages": 35
+    },
+    {
+        "title": "Atomic Habits",
+        "author": "James Clear",
+        "gender": "Self-help",
+        "pages": 320
+    }
+]
