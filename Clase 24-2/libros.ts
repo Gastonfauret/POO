@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = import('fs');
 
 const libros: string [] = [];
 const data = fs.readFileSync('./books.json', 'utf8');
@@ -33,7 +33,7 @@ export class Libro{
         //         console.log('El libro', libro.nombre, ' No se ha podido añadir a la biblioteca');
         //     }
         // }
-
+        
         addBook(books, newBook) {
             books.push(newBook);
             console.log('Se ha añadido ', newBook.nombre, ' a la base de datos.');
@@ -46,10 +46,19 @@ export class Libro{
         //         console.log(nombre, ' Existe en bibioteca', libroEncontrado)
         //         return libroEncontrado
         //     } else{
-        //         console.log(nombre, ' No existe en biblioteca');
-                
+        //         console.log(nombre, ' No existe en biblioteca');                
         //     }
         // }
+
+        consultLibrary(nombre: string, books) {
+            const bookFound = books.find(books => books.nombre === nombre)
+            if (bookFound) {
+                console.log(nombre, ' Its in the Library ', bookFound)
+                return bookFound
+            } else {
+                console.log(nombre, ' does not exist in the library')
+            }
+        }
     
         // modificar(nombre: string, array: Libro[], dato: string){
         //     let libroModificar = this.consultar(nombre, array)
@@ -61,6 +70,16 @@ export class Libro{
         //         console.log('El libro no se ha podido modificar');                
         //     }            
         // }
+
+        modifyBooks(nombre: string, books, data: string) {
+            const modifiedBook = this.consultLibrary(nombre, books)
+            if(modifiedBook) {
+                modifiedBook.nombre = data;
+                console.log('The Book ', nombre, 'has been modified. Now, its called ', data);
+            } else {
+                console.log('The book has not been modified');                
+            }
+        }
     
         // eliminar(nombre: string, array: Libro[]): any {
         //     let libroEncontrado = array.findIndex(libro => libro.nombre == nombre);
@@ -69,50 +88,50 @@ export class Libro{
         //         console.log('Libro eliminado', nombre);
         //         console.log(array);
         //         return array;
-        //     } else {
-    
+        //     } else {    
         //     console.log('Libro ', nombre, 'no ha sido eliminado');
         //     }
         // }
+
+        deleteBooks(nombre: string, books) {
+            const bookFound = books.findIndex(books => books.nombre == nombre);
+            if (bookFound >= 0) {
+                books.splice(bookFound, 1);
+                console.log('Book Eliminated: ', nombre);
+                console.log(books);
+                return books
+            } else {
+                console.log('The books ', nombre, 'has not been eliminated.');
+                
+            }
+        }
     }
 
+    //Crear Libros:
     const girlsTrain = new Libro("Girl's Train", "Novel", 235, "Paula Hawkins");
     const readyPlayerOne = new Libro('Ready Player One', 'Sci-fi', 235, 'Ernest Cline');
     const gestor = new GestorLibros;
 
-    //gestor.addBook(girlsTrain, books)
-
+    //Ejecutar la funcion todo:
     gestor.todo(books);
+
+    //Ejecutar la funcion addBooks:
     gestor.addBook(books, girlsTrain);
     gestor.addBook(books, readyPlayerOne);
     gestor.todo(books);
 
-    
+    //Ejecutar la funcion consultLibrary:
+    gestor.consultLibrary("Girl's Train", books);
 
+    //Ejecutar la funcion modifyBook:
+    gestor.modifyBooks('Ready Player One', books, 'RPO - Part. 1');
+
+    //Ejecutar la funcion deleteBooks:
+    gestor.deleteBooks("The Call of Cthutulu", books);
     /*
-    Crear libros
     Crear una biblioteca de libros
     crear gestor de libros
-    ejecutar la funcion todo
-    ejecutar la funcion insertar}
+    ejecutar la funcion insertar
     ejecutar la funcion consultar
     ejecutar la funcion modificar
-    ejecutar la funcion eliminar */
-
-    /* Nuestros libros */    
-    //var harryPotter = new Libro('Harry Potter', 'Fantasia', 200, 'J.k. Rowling');
-    //var martinFierro = new Libro('Martin Fierro', 'Tradicionalista', 200, 'Jose Hernandez');
-    //var señorAnillos = new Libro('Señor de los anillos', 'Fantasia', 500, 'J. RR Tolkien');
-
-    /* Poblar nuestra biblioteca con libros */
-    //var biblioteca = [harryPotter, martinFierro, señorAnillos];
-
-    /* Crear nuevo gestor de libros */
-    //var gestor = new GestorLibros;
-    //var carrie = new Libro('Carrie', 'Terror', 450, 'Stephen King');
-    // gestor.insertar(carrie, biblioteca)
-    // gestor.todo(biblioteca)
-    // gestor.consultar('Señor de los anillos', biblioteca)
-    // gestor.modificar('Harry Potter', biblioteca, 'Harry Potter y el prisionero de askaban')
-    // gestor.eliminar('Harry Potter', biblioteca);
-
+    ejecutar la funcion eliminar */  

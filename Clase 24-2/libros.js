@@ -37,23 +37,44 @@ var GestorLibros = /** @class */ (function () {
         console.log('Se ha añadido ', newBook.nombre, ' a la base de datos.');
         return books;
     };
+    // consultar(nombre: string, array: Libro[]){
+    //     let libroEncontrado = array.find(libro => libro.nombre === nombre )
+    //     if(libroEncontrado){
+    //         console.log(nombre, ' Existe en bibioteca', libroEncontrado)
+    //         return libroEncontrado
+    //     } else{
+    //         console.log(nombre, ' No existe en biblioteca');                
+    //     }
+    // }
+    GestorLibros.prototype.consultLibrary = function (nombre, books) {
+        var bookFound = books.find(function (books) { return books.nombre === nombre; });
+        if (bookFound) {
+            console.log(nombre, ' Its in the Library ', bookFound);
+            return bookFound;
+        }
+        else {
+            console.log(nombre, ' does not exist in the library');
+        }
+    };
     return GestorLibros;
 }());
 exports.GestorLibros = GestorLibros;
+//Crear Libros:
 var girlsTrain = new Libro("Girl's Train", "Novel", 235, "Paula Hawkins");
 var readyPlayerOne = new Libro('Ready Player One', 'Sci-fi', 235, 'Ernest Cline');
 var gestor = new GestorLibros;
-//gestor.addBook(girlsTrain, books)
+//Ejecutar la funcion todo:
 gestor.todo(books);
+//Ejecutar la funcion addBooks:
 gestor.addBook(books, girlsTrain);
 gestor.addBook(books, readyPlayerOne);
 gestor.todo(books);
+//Ejecutar la funcion consultLibrary:
+gestor.consultLibrary("Girl's Train", books);
 /*
-Crear libros
 Crear una biblioteca de libros
 crear gestor de libros
-ejecutar la funcion todo
-ejecutar la funcion insertar}
+ejecutar la funcion insertar
 ejecutar la funcion consultar
 ejecutar la funcion modificar
 ejecutar la funcion eliminar */
