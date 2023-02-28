@@ -23,7 +23,7 @@ var GestorLibros = /** @class */ (function () {
     function GestorLibros() {
     }
     GestorLibros.prototype.todo = function (books) {
-        console.log('Libros: ', books);
+        console.log("".concat(books));
     };
     // insertar(libro: Libro, array: Libro[]){
     //     if(array.push(libro)){
@@ -34,8 +34,7 @@ var GestorLibros = /** @class */ (function () {
     // }
     GestorLibros.prototype.addBook = function (books, newBook) {
         books.push(newBook);
-        console.log('Se ha añadido ', newBook.nombre, ' a la base de datos.');
-        return books;
+        console.log("The book ".concat(newBook.nombre, " has been added to the library"));
     };
     // consultar(nombre: string, array: Libro[]){
     //     let libroEncontrado = array.find(libro => libro.nombre === nombre )
@@ -49,11 +48,51 @@ var GestorLibros = /** @class */ (function () {
     GestorLibros.prototype.consultLibrary = function (nombre, books) {
         var bookFound = books.find(function (books) { return books.nombre === nombre; });
         if (bookFound) {
-            console.log(nombre, ' Its in the Library ', bookFound);
-            return bookFound;
+            console.log("".concat(nombre, " Its in the Library, ").concat(bookFound));
         }
         else {
-            console.log(nombre, ' does not exist in the library');
+            console.log("".concat(nombre, " doesn't exist in the library"));
+        }
+    };
+    // modificar(nombre: string, array: Libro[], dato: string){
+    //     let libroModificar = this.consultar(nombre, array)
+    //     if(libroModificar){
+    //         libroModificar.nombre = dato;
+    //         console.log('El libro', nombre, ' Ha sido modificado y ahora se llama ', dato);
+    //     }
+    //     else {
+    //         console.log('El libro no se ha podido modificar');                
+    //     }            
+    // }
+    GestorLibros.prototype.modifyBooks = function (nombre, books, data) {
+        var modifiedBook = this.consultLibrary(nombre, books);
+        if (modifiedBook) {
+            modifiedBook.nombre = data;
+            console.log("The book ".concat(nombre, " has been modified. Now, its called ").concat(data));
+        }
+        else {
+            console.log("The book has not been modified");
+        }
+    };
+    // eliminar(nombre: string, array: Libro[]): any {
+    //     let libroEncontrado = array.findIndex(libro => libro.nombre == nombre);
+    //     if(libroEncontrado >= 0){  
+    //         array.splice(libroEncontrado, 1)
+    //         console.log('Libro eliminado', nombre);
+    //         console.log(array);
+    //         return array;
+    //     } else {    
+    //     console.log('Libro ', nombre, 'no ha sido eliminado');
+    //     }
+    // }
+    GestorLibros.prototype.deleteBooks = function (nombre, books) {
+        var deletedBook = this.consultLibrary(nombre, books);
+        if (deletedBook) {
+            delete books[deletedBook];
+            return "The book ".concat(nombre, " was succesfully deleted");
+        }
+        else {
+            return "The book ".concat(nombre, " couldn't be deleted");
         }
     };
     return GestorLibros;
@@ -64,31 +103,16 @@ var girlsTrain = new Libro("Girl's Train", "Novel", 235, "Paula Hawkins");
 var readyPlayerOne = new Libro('Ready Player One', 'Sci-fi', 235, 'Ernest Cline');
 var gestor = new GestorLibros;
 //Ejecutar la funcion todo:
-gestor.todo(books);
+console.log(gestor.todo(books));
+;
 //Ejecutar la funcion addBooks:
 gestor.addBook(books, girlsTrain);
 gestor.addBook(books, readyPlayerOne);
-gestor.todo(books);
 //Ejecutar la funcion consultLibrary:
 gestor.consultLibrary("Girl's Train", books);
-/*
-Crear una biblioteca de libros
-crear gestor de libros
-ejecutar la funcion insertar
-ejecutar la funcion consultar
-ejecutar la funcion modificar
-ejecutar la funcion eliminar */
-/* Nuestros libros */
-//var harryPotter = new Libro('Harry Potter', 'Fantasia', 200, 'J.k. Rowling');
-//var martinFierro = new Libro('Martin Fierro', 'Tradicionalista', 200, 'Jose Hernandez');
-//var señorAnillos = new Libro('Señor de los anillos', 'Fantasia', 500, 'J. RR Tolkien');
-/* Poblar nuestra biblioteca con libros */
-//var biblioteca = [harryPotter, martinFierro, señorAnillos];
-/* Crear nuevo gestor de libros */
-//var gestor = new GestorLibros;
-//var carrie = new Libro('Carrie', 'Terror', 450, 'Stephen King');
-// gestor.insertar(carrie, biblioteca)
-// gestor.todo(biblioteca)
-// gestor.consultar('Señor de los anillos', biblioteca)
-// gestor.modificar('Harry Potter', biblioteca, 'Harry Potter y el prisionero de askaban')
-// gestor.eliminar('Harry Potter', biblioteca);
+gestor.consultLibrary('Atomic Habits', books);
+//Ejecutar la funcion modifyBook:
+gestor.modifyBooks('Ready Player One', books, 'RPO - Part. 1');
+//Ejecutar la funcion deleteBooks:
+gestor.deleteBooks("The Raven", books);
+gestor.todo(books);
