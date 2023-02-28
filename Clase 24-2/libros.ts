@@ -23,8 +23,8 @@ export class Libro{
     /* Implementar la clase GestorLibros → debe soportar insertar/consultar/modificar/eliminar libros */
     export class GestorLibros{
         todo(books){
-            console.log(`${books}`);
-        }
+            return books
+            }
     
         // insertar(libro: Libro, array: Libro[]){
         //     if(array.push(libro)){
@@ -35,8 +35,12 @@ export class Libro{
         // }
         
         addBook(books, newBook) {
+            if(books.push(newBook)) {
             books.push(newBook);
-            console.log(`The book ${newBook.nombre} has been added to the library`);
+            console.log(`The book "${newBook.nombre}" has been added to the library`);
+            } else {
+                console.log(`The book "${newBook.nombre}" hasn't been added to the library`);
+            }
         }
 
         // consultar(nombre: string, array: Libro[]){
@@ -52,9 +56,10 @@ export class Libro{
         consultLibrary(nombre: string, books) {
             const bookFound = books.find(books => books.nombre === nombre)
             if (bookFound) {
-                console.log(`${nombre} Its in the Library, ${bookFound}`);                 
+                console.log(`The book "${nombre}" Its in the Library`);
+                return books;                 
             } else {
-                console.log(`${nombre} doesn't exist in the library`);
+                console.log(`"${nombre}" doesn't exist in the library`);
             }
         }
     
@@ -70,11 +75,11 @@ export class Libro{
         // }
 
         modifyBooks(nombre: string, books, data: string) {
-            let modifiedBook = this.consultLibrary(nombre, books)
-            if(modifiedBook) {
+            let modifiedBook = this.consultLibrary(nombre, books);
+            if (modifiedBook) {
                 modifiedBook.nombre = data;
-                console.log(`The book ${nombre} has been modified. Now, its called ${data}`);
-            } else {
+                console.log(`The book "${nombre}" has been modified. Now, its called ${data}`);
+                } else {
                 console.log(`The book has not been modified`);                            
             }
         }
@@ -97,8 +102,7 @@ export class Libro{
                 delete books [deletedBook];
                 return `The book ${nombre} was succesfully deleted`;
                 } else {
-                    return `The book ${nombre} couldn't be deleted`;
-                
+                return `The book ${nombre} couldn't be deleted`;
             }
         }
     }
@@ -109,16 +113,15 @@ export class Libro{
     const gestor = new GestorLibros;
 
     //Ejecutar la funcion todo:
-    console.log(gestor.todo(books));
-    ;
-
+    console.log(gestor.todo(books));     
+    
     //Ejecutar la funcion addBooks:
     gestor.addBook(books, girlsTrain);
     gestor.addBook(books, readyPlayerOne);
     
     //Ejecutar la funcion consultLibrary:
-    gestor.consultLibrary("Girl's Train", books);
-    gestor.consultLibrary('Atomic Habits', books);
+    console.log(gestor.consultLibrary("Girl's Train", books));    
+    console.log(gestor.consultLibrary('Atomic Habits', books));     
 
     //Ejecutar la funcion modifyBook:
     gestor.modifyBooks('Ready Player One', books, 'RPO - Part. 1');
@@ -126,4 +129,4 @@ export class Libro{
     //Ejecutar la funcion deleteBooks:
     gestor.deleteBooks("The Raven", books);
 
-    gestor.todo(books);
+    console.log(gestor.todo(books)); 

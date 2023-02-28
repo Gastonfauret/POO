@@ -23,7 +23,7 @@ var GestorLibros = /** @class */ (function () {
     function GestorLibros() {
     }
     GestorLibros.prototype.todo = function (books) {
-        console.log("".concat(books));
+        return books;
     };
     // insertar(libro: Libro, array: Libro[]){
     //     if(array.push(libro)){
@@ -33,8 +33,13 @@ var GestorLibros = /** @class */ (function () {
     //     }
     // }
     GestorLibros.prototype.addBook = function (books, newBook) {
-        books.push(newBook);
-        console.log("The book ".concat(newBook.nombre, " has been added to the library"));
+        if (books.push(newBook)) {
+            books.push(newBook);
+            console.log("The book ".concat(newBook.nombre, " has been added to the library"));
+        }
+        else {
+            console.log("The book ".concat(newBook.nombre, " hasn't been added to the library"));
+        }
     };
     // consultar(nombre: string, array: Libro[]){
     //     let libroEncontrado = array.find(libro => libro.nombre === nombre )
@@ -48,7 +53,8 @@ var GestorLibros = /** @class */ (function () {
     GestorLibros.prototype.consultLibrary = function (nombre, books) {
         var bookFound = books.find(function (books) { return books.nombre === nombre; });
         if (bookFound) {
-            console.log("".concat(nombre, " Its in the Library, ").concat(bookFound));
+            console.log("The book \"".concat(nombre, "\" Its in the Library"));
+            return books;
         }
         else {
             console.log("".concat(nombre, " doesn't exist in the library"));
@@ -104,15 +110,14 @@ var readyPlayerOne = new Libro('Ready Player One', 'Sci-fi', 235, 'Ernest Cline'
 var gestor = new GestorLibros;
 //Ejecutar la funcion todo:
 console.log(gestor.todo(books));
-;
 //Ejecutar la funcion addBooks:
 gestor.addBook(books, girlsTrain);
 gestor.addBook(books, readyPlayerOne);
 //Ejecutar la funcion consultLibrary:
-gestor.consultLibrary("Girl's Train", books);
-gestor.consultLibrary('Atomic Habits', books);
+console.log(gestor.consultLibrary("Girl's Train", books));
+console.log(gestor.consultLibrary('Atomic Habits', books));
 //Ejecutar la funcion modifyBook:
 gestor.modifyBooks('Ready Player One', books, 'RPO - Part. 1');
 //Ejecutar la funcion deleteBooks:
 gestor.deleteBooks("The Raven", books);
-gestor.todo(books);
+console.log(gestor.todo(books));
