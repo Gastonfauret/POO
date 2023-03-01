@@ -1,6 +1,7 @@
 {
   "devDependencies": {
-    "@types/node": "^18.14.2"
+    "@types/node": "^18.14.2",
+    "@types/webpack-env": "^1.18.0"
   },
   "dependencies": {
     "request": "^2.88.2",

@@ -2,28 +2,28 @@ const fs = require('fs');
 
 const libros: string [] = [];
 const data = fs.readFileSync('./books.json', 'utf8');
-const books = JSON.parse(data);
-for(let i: number = 0; i < books.lenght; i++) {
-    libros.push(books[i])
+const library = JSON.parse(data);
+for(let i: number = 0; i < library.lenght; i++) {
+    libros.push(library[i])
 }
 export class Libro{
-    nombre: string;
-    genero: string;
-    cantPaginas: number;
-    autor: string;
+    name: string;
+    gender: string;
+    pages: number;
+    author: string;
             
-    constructor(nombre: string, genero: string, cantPaginas: number, autor?: any){
-        this.nombre = nombre;
-        this.genero = genero;
-        this.cantPaginas = cantPaginas;
-        this.autor = autor;
+    constructor(name: string, gender: string, pages: number, author: string){
+        this.name = name;
+        this.gender = gender;
+        this.pages = pages;
+        this.author = author;
         }
     }    
     
     /* Implementar la clase GestorLibros → debe soportar insertar/consultar/modificar/eliminar libros */
-    export class GestorLibros{
-        todo(books){
-            return books
+    export class Manage{
+        all(library){
+            return library
             }
     
         // insertar(libro: Libro, array: Libro[]){
@@ -34,12 +34,12 @@ export class Libro{
         //     }
         // }
         
-        addBook(books, newBook) {
-            if(books.push(newBook)) {
-            books.push(newBook);
-            console.log(`The book "${newBook.nombre}" has been added to the library`);
+        addBook(library, newBook) {
+            if(library.push(newBook)) {
+                library.push(newBook);
+                console.log(`The book "${newBook.name}" has been added to the library`);
             } else {
-                console.log(`The book "${newBook.nombre}" hasn't been added to the library`);
+                console.log(`The book "${newBook.name}" hasn't been added to the library`);
             }
         }
 
@@ -53,13 +53,13 @@ export class Libro{
         //     }
         // }
 
-        consultLibrary(nombre: string, books) {
-            const bookFound = books.find(books => books.nombre === nombre)
+        consultLibrary(name: string, library) {
+            const bookFound = library.find(library => library.name === name)
             if (bookFound) {
-                console.log(`The book "${nombre}" Its in the Library`);
-                return books;                 
+                console.log(`The book "${name}" Its in the Library`);
+                return library;                 
             } else {
-                console.log(`"${nombre}" doesn't exist in the library`);
+                console.log(`"${name}" doesn't exist in the library`);
             }
         }
     
@@ -74,12 +74,12 @@ export class Libro{
         //     }            
         // }
 
-        modifyBooks(nombre: string, books, data: string) {
-            let modifiedBook = this.consultLibrary(nombre, books);
+        modifyBooks(name: string, library, data: string) {
+            let modifiedBook = this.consultLibrary(name, library);
             if (modifiedBook) {
-                modifiedBook.nombre = data;
-                console.log(`The book "${nombre}" has been modified. Now, its called ${data}`);
-                } else {
+                modifiedBook.name = data;
+                console.log(`The book "${name}" has been modified. Now, its called ${data}`);
+            } else {
                 console.log(`The book has not been modified`);                            
             }
         }
@@ -96,37 +96,45 @@ export class Libro{
         //     }
         // }
 
-        deleteBooks(nombre: string, books) {
-            const deletedBook = this.consultLibrary(nombre, books)
+        deleteBooks(name: string, library) {
+            const deletedBook = this.consultLibrary(name, library)
             if (deletedBook) {
-                delete books [deletedBook];
-                return `The book ${nombre} was succesfully deleted`;
+                delete library [deletedBook];
+                return `The book ${name} was succesfully deleted`;
                 } else {
-                return `The book ${nombre} couldn't be deleted`;
+                    return `The book ${name} couldn't be deleted`;
+                }
             }
         }
-    }
 
-    //Crear Libros:
+    //Create Books:
     const girlsTrain = new Libro("Girl's Train", "Novel", 235, "Paula Hawkins");
     const readyPlayerOne = new Libro('Ready Player One', 'Sci-fi', 235, 'Ernest Cline');
-    const gestor = new GestorLibros;
+    const theCall = new Libro('The Raven', 'Thriller', 13, 'Edgar Alan Poe');
+    const atomicHabits = new Libro('Atomic Habits', 'Self-Help', 350, 'James Clear');
+    const emotional = new Libro('Emotional Intelligence', 'Education', 527, 'Daniel Goleman');
+    const manager = new Manage;
 
-    //Ejecutar la funcion todo:
-    console.log(gestor.todo(books));     
+    //Execute 'all' function:
+    console.log(manager.all(library));     
     
-    //Ejecutar la funcion addBooks:
-    gestor.addBook(books, girlsTrain);
-    gestor.addBook(books, readyPlayerOne);
+    //Execute 'addBooks' function:
+    manager.addBook(library, girlsTrain);
+    manager.addBook(library, readyPlayerOne);
+    manager.addBook(library, theCall);
+    manager.addBook(library, atomicHabits);
+    manager.addBook(library, emotional);
     
-    //Ejecutar la funcion consultLibrary:
-    console.log(gestor.consultLibrary("Girl's Train", books));    
-    console.log(gestor.consultLibrary('Atomic Habits', books));     
+    //Execute 'consultLibrary' function:
+    console.log(manager.consultLibrary("Girl's Train", library));    
+    console.log(manager.consultLibrary('Atomic Habits', library));     
 
-    //Ejecutar la funcion modifyBook:
-    gestor.modifyBooks('Ready Player One', books, 'RPO - Part. 1');
+    //Execute 'modifyBook' function:
+    manager.modifyBooks('Ready Player One', library, 'RPO - Part. 1');
+    manager.modifyBooks('The Raven', library, 'Edgar Alan Poe - Short Stories Collection.');
 
-    //Ejecutar la funcion deleteBooks:
-    gestor.deleteBooks("The Raven", books);
+    //Execute 'deleteBooks' function:
+    manager.deleteBooks('The Raven', library);
+    manager.deleteBooks('Atomic Habits', library);
 
-    console.log(gestor.todo(books)); 
+    console.log(manager.all(library)); 
