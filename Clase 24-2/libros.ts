@@ -1,3 +1,4 @@
+declare const require: any;
 const fs = require('fs');
 
 const libros: string [] = [];
@@ -5,7 +6,7 @@ const data = fs.readFileSync('./books.json', 'utf8');
 const library = JSON.parse(data);
 for(let i: number = 0; i < library.lenght; i++) {
     libros.push(library[i])
-}
+    }
 export class Libro{
     name: string;
     gender: string;
@@ -32,11 +33,9 @@ export class Libro{
         //     } else{
         //         console.log('El libro', libro.nombre, ' No se ha podido añadir a la biblioteca');
         //     }
-        // }
-        
-        addBook(library, newBook) {
+        //}        
+        addBook(library: any, newBook: any) {
             if(library.push(newBook)) {
-                library.push(newBook);
                 console.log(`The book "${newBook.name}" has been added to the library`);
             } else {
                 console.log(`The book "${newBook.name}" hasn't been added to the library`);
