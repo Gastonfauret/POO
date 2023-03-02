@@ -19,8 +19,7 @@ export class Libro{
     /* Implementar la clase GestorLibros → debe soportar insertar/consultar/modificar/eliminar libros */
     export class Manage{
         all(libros){
-            console.log(libros);
-            
+            console.log(libros);            
             }
     
         addBook(libros: any, newBook: any) {
