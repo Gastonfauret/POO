@@ -3,11 +3,6 @@ exports.__esModule = true;
 exports.Manage = exports.Libro = void 0;
 var fs = require('fs');
 var libros = [];
-var data = fs.readFileSync('./books.json', 'utf8');
-var library = JSON.parse(data);
-for (var i = 0; i < library.lenght; i++) {
-    libros.push(library[i]);
-}
 var Libro = /** @class */ (function () {
     function Libro(name, gender, pages, author) {
         this.name = name;
@@ -22,55 +17,30 @@ exports.Libro = Libro;
 var Manage = /** @class */ (function () {
     function Manage() {
     }
-    Manage.prototype.all = function (library) {
-        return library;
+    Manage.prototype.all = function (libros) {
+        console.log(libros);
     };
-    // insertar(libro: Libro, array: Libro[]){
-    //     if(array.push(libro)){
-    //         console.log('Se ha añadido ', libro.nombre, ' a la base de datos', array);
-    //     } else{
-    //         console.log('El libro', libro.nombre, ' No se ha podido añadir a la biblioteca');
-    //     }
-    //}        
-    Manage.prototype.addBook = function (library, newBook) {
-        if (library.push(newBook)) {
+    Manage.prototype.addBook = function (libros, newBook) {
+        if (libros.push(newBook)) {
+            this.convertArrayToJson(libros);
             console.log("The book \"".concat(newBook.name, "\" has been added to the library"));
         }
         else {
             console.log("The book \"".concat(newBook.name, "\" hasn't been added to the library"));
         }
     };
-    // consultar(nombre: string, array: Libro[]){
-    //     let libroEncontrado = array.find(libro => libro.nombre === nombre )
-    //     if(libroEncontrado){
-    //         console.log(nombre, ' Existe en bibioteca', libroEncontrado)
-    //         return libroEncontrado
-    //     } else{
-    //         console.log(nombre, ' No existe en biblioteca');                
-    //     }
-    // }
-    Manage.prototype.consultLibrary = function (name, library) {
-        var bookFound = library.find(function (library) { return library.name === name; });
+    Manage.prototype.consultLibrary = function (name, libros) {
+        var bookFound = libros.find(function (libros) { return libros.name === name; });
         if (bookFound) {
             console.log("The book \"".concat(name, "\" Its in the Library"));
-            return library;
+            return bookFound;
         }
         else {
             console.log("\"".concat(name, "\" doesn't exist in the library"));
         }
     };
-    // modificar(nombre: string, array: Libro[], dato: string){
-    //     let libroModificar = this.consultar(nombre, array)
-    //     if(libroModificar){
-    //         libroModificar.nombre = dato;
-    //         console.log('El libro', nombre, ' Ha sido modificado y ahora se llama ', dato);
-    //     }
-    //     else {
-    //         console.log('El libro no se ha podido modificar');                
-    //     }            
-    // }
-    Manage.prototype.modifyBooks = function (name, library, data) {
-        var modifiedBook = this.consultLibrary(name, library);
+    Manage.prototype.modifyBooks = function (name, libros, data) {
+        var modifiedBook = this.consultLibrary(name, libros);
         if (modifiedBook) {
             modifiedBook.name = data;
             console.log("The book \"".concat(name, "\" has been modified. Now, its called ").concat(data));
@@ -79,26 +49,27 @@ var Manage = /** @class */ (function () {
             console.log("The book has not been modified");
         }
     };
-    // eliminar(nombre: string, array: Libro[]): any {
-    //     let libroEncontrado = array.findIndex(libro => libro.nombre == nombre);
-    //     if(libroEncontrado >= 0){  
-    //         array.splice(libroEncontrado, 1)
-    //         console.log('Libro eliminado', nombre);
-    //         console.log(array);
-    //         return array;
-    //     } else {    
-    //     console.log('Libro ', nombre, 'no ha sido eliminado');
-    //     }
-    // }
-    Manage.prototype.deleteBooks = function (name, library) {
-        var deletedBook = this.consultLibrary(name, library);
-        if (deletedBook) {
-            delete library[deletedBook];
-            return "The book ".concat(name, " was succesfully deleted");
+    Manage.prototype.deleteBooks = function (name, libros) {
+        var deletedBook = libros.findIndex(function (libro) { return libro.name == name; });
+        if (deletedBook >= 0) {
+            libros.splice(deletedBook, 1);
+            console.log("The book \"".concat(name, "\" was sucesfully deleted"));
+            console.log(libros);
+            return libros;
         }
         else {
             return "The book ".concat(name, " couldn't be deleted");
         }
+    };
+    Manage.prototype.convertArrayToJson = function (libros) {
+        var fs = require('fs');
+        var file = 'books.json';
+        var data = JSON.stringify(libros);
+        fs.writeFile(file, data, function (error) {
+            if (error) {
+                return console.log(error);
+            }
+        });
     };
     return Manage;
 }());
@@ -111,20 +82,20 @@ var atomicHabits = new Libro('Atomic Habits', 'Self-Help', 350, 'James Clear');
 var emotional = new Libro('Emotional Intelligence', 'Education', 527, 'Daniel Goleman');
 var manager = new Manage;
 //Execute 'all' function:
-console.log(manager.all(typeof library));
+console.log(manager.all(libros));
 //Execute 'addBooks' function:
-manager.addBook(library, girlsTrain);
-manager.addBook(library, readyPlayerOne);
-manager.addBook(library, theCall);
-manager.addBook(library, atomicHabits);
-manager.addBook(library, emotional);
+manager.addBook(libros, girlsTrain);
+manager.addBook(libros, readyPlayerOne);
+manager.addBook(libros, theCall);
+manager.addBook(libros, atomicHabits);
+manager.addBook(libros, emotional);
 //Execute 'consultLibrary' function:
-console.log(manager.consultLibrary("Girl's Train", library));
-console.log(manager.consultLibrary('Atomic Habits', library));
+console.log(manager.consultLibrary("Girl's Train", libros));
+console.log(manager.consultLibrary('Atomic Habits', libros));
 //Execute 'modifyBook' function:
-manager.modifyBooks('Ready Player One', library, 'RPO - Part. 1');
-manager.modifyBooks('The Raven', library, 'Edgar Alan Poe - Short Stories Collection.');
+manager.modifyBooks('Ready Player One', libros, 'RPO - Part. 1');
+manager.modifyBooks('The Raven', libros, 'Edgar Alan Poe - Short Stories Collection.');
 //Execute 'deleteBooks' function:
-manager.deleteBooks('The Raven', library);
-manager.deleteBooks('Atomic Habits', library);
-console.log(manager.all(library));
+manager.deleteBooks('Edgar Alan Poe - Short Stories Collection.', libros);
+manager.deleteBooks('Atomic Habits', libros);
+manager.all(libros);

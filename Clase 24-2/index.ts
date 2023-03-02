@@ -1,9 +1,8 @@
-import { json } from "node:stream/consumers";
-
+declare const require: any;
 const fs = require('fs');
 
 const libros: string [] = [];
-const data = fs.readFileSync('./books.json', 'utf8');
+const data = fs.readFileSync('./books2.json', 'utf8');
 const books = JSON.parse(data);
 for(let i: number = 0; i < books.lenght; i++) {
     libros.push(books[i])
@@ -28,4 +27,4 @@ function addBook(books, newBook) {
 
 addBook(books, readyPlayerOne);
 addBook(books, girlsTrain);
-console.log(books);
+console.log(typeof books);

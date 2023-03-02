@@ -1,7 +1,1 @@
-{
-    "name": "La vez que casi me muero",
-    "gender": "Biography",
-    "pages": 220,
-    "author": "German Beder"
-
-}
+[{"name":"Girl's Train","gender":"Novel","pages":235,"author":"Paula Hawkins"},{"name":"Ready Player One","gender":"Sci-fi","pages":235,"author":"Ernest Cline"},{"name":"The Raven","gender":"Thriller","pages":13,"author":"Edgar Alan Poe"},{"name":"Atomic Habits","gender":"Self-Help","pages":350,"author":"James Clear"},{"name":"Emotional Intelligence","gender":"Education","pages":527,"author":"Daniel Goleman"}]
