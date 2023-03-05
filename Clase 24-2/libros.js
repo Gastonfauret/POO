@@ -1,6 +1,4 @@
-"use strict";
-exports.__esModule = true;
-exports.Manage = exports.Libro = void 0;
+//declare const require: any;
 var fs = require('fs');
 var libros = [];
 var Libro = /** @class */ (function () {
@@ -12,7 +10,6 @@ var Libro = /** @class */ (function () {
     }
     return Libro;
 }());
-exports.Libro = Libro;
 /* Implementar la clase GestorLibros → debe soportar insertar/consultar/modificar/eliminar libros */
 var Manage = /** @class */ (function () {
     function Manage() {
@@ -43,7 +40,7 @@ var Manage = /** @class */ (function () {
         var modifiedBook = this.consultLibrary(name, libros);
         if (modifiedBook) {
             modifiedBook.name = data;
-            console.log("The book \"".concat(name, "\" has been modified. Now, its called ").concat(data));
+            console.log("The book \"".concat(name, "\" has been modified. Now, its called \"").concat(data, "\""));
         }
         else {
             console.log("The book has not been modified");
@@ -73,7 +70,6 @@ var Manage = /** @class */ (function () {
     };
     return Manage;
 }());
-exports.Manage = Manage;
 //Create Books:
 var girlsTrain = new Libro("Girl's Train", "Novel", 235, "Paula Hawkins");
 var readyPlayerOne = new Libro('Ready Player One', 'Sci-fi', 235, 'Ernest Cline');

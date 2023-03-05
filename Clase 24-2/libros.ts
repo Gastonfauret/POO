@@ -1,8 +1,8 @@
-declare const require: any;
+//declare const require: any;
 const fs = require('fs');
 
 const libros: string [] = [];
-export class Libro{
+class Libro{
     name: string;
     gender: string;
     pages: number;
@@ -17,7 +17,7 @@ export class Libro{
     }    
     
     /* Implementar la clase GestorLibros → debe soportar insertar/consultar/modificar/eliminar libros */
-    export class Manage{
+    class Manage{
         all(libros){
             console.log(libros);            
             }

@@ -1,4 +1,4 @@
-declare const require: any;
+//declare const require: any;
 const fs = require('fs');
 
 const libros: string [] = [];
