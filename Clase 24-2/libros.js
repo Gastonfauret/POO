@@ -73,16 +73,16 @@ var Manage = /** @class */ (function () {
 //Create Books:
 var girlsTrain = new Libro("Girl's Train", "Novel", 235, "Paula Hawkins");
 var readyPlayerOne = new Libro('Ready Player One', 'Sci-fi', 235, 'Ernest Cline');
-var theCall = new Libro('The Raven', 'Thriller', 13, 'Edgar Alan Poe');
+var theRaven = new Libro('The Raven', 'Thriller', 13, 'Edgar Alan Poe');
 var atomicHabits = new Libro('Atomic Habits', 'Self-Help', 350, 'James Clear');
 var emotional = new Libro('Emotional Intelligence', 'Education', 527, 'Daniel Goleman');
 var manager = new Manage;
 //Execute 'all' function:
-console.log(manager.all(libros));
+//console.log(manager.all(libros));     
 //Execute 'addBooks' function:
 manager.addBook(libros, girlsTrain);
 manager.addBook(libros, readyPlayerOne);
-manager.addBook(libros, theCall);
+manager.addBook(libros, theRaven);
 manager.addBook(libros, atomicHabits);
 manager.addBook(libros, emotional);
 //Execute 'consultLibrary' function:

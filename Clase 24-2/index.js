@@ -1,3 +1,4 @@
+//declare const require: any;
 var fs = require('fs');
 var libros = [];
 var data = fs.readFileSync('./books2.json', 'utf8');

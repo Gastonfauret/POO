@@ -1,30 +1,16 @@
-//import Auto from "./clase auto";
+const baseDeDatosAutos: string [] = [];
 
-class registroAutomotor{
-    private marca: string;
-    private modelo: string;
-    private motor: number;
-    private patente: string;
-    private nroChasis: number;
-    private nroMotor: number;
-    
-    baseDeDatosAutos: any [] = [];
+export class RegistroAutomotor{
+    actualizacion(baseDeDatosAutos) {
+        console.log(baseDeDatosAutos);       
+    } 
 
-    constructor(marca: string,  modelo: string, motor: number, patente: string,  nroChasis: number, nroMotor: number) {
-        this.marca = marca;
-        this.modelo = modelo;
-        this.motor = motor;
-        this.patente = patente;
-        this.nroChasis = nroChasis;
-        this.nroMotor = nroMotor;
-    }
-
-    anadeAutos(baseDeDatosAutos: any, nuevoAuto: any) {
+    anadeAutos(baseDeDatosAutos, nuevoAuto: string) {
         if(baseDeDatosAutos.push(nuevoAuto)) {
             this.arrayAJason(baseDeDatosAutos)
-            console.log(`El Vehiculo "${nuevoAuto.name}" ha sido añadido a la base de datos`);
+            console.log(`El Vehiculo "${nuevoAuto}" ha sido añadido a la base de datos`);
         } else {
-            console.log(`El vehiculo "${nuevoAuto.name}" no ha sido añadido a la base de datos`);
+            console.log(`El vehiculo "${nuevoAuto}" no ha sido añadido a la base de datos`);
         }
     }
 
@@ -34,7 +20,7 @@ class registroAutomotor{
             console.log(`El vehiculo "${nombre}" se encuentra en la base de datos`);
             return autoEncontrado;                 
         } else {
-            console.log(`"${nombre}" doesn't exist in the library`);
+            console.log(`"${nombre}" no se encuentra en la base de datos`);
         }
     }
 
@@ -63,7 +49,7 @@ class registroAutomotor{
     arrayAJason(baseDeDatosAutos) {
         var fs = require('fs');
         var file = './registro autos.json';
-        var data = JSON.stringify(this.baseDeDatosAutos);
+        var data = JSON.stringify(baseDeDatosAutos);
         
         fs.writeFile(file, data, function(error) {
             if(error) {
@@ -73,4 +59,3 @@ class registroAutomotor{
         }
     }
 
-    export default registroAutomotor;

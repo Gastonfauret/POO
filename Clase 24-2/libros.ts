@@ -1,5 +1,4 @@
 //declare const require: any;
-const fs = require('fs');
 
 const libros: string [] = [];
 class Libro{
@@ -80,18 +79,19 @@ class Libro{
     //Create Books:
     const girlsTrain = new Libro("Girl's Train", "Novel", 235, "Paula Hawkins");
     const readyPlayerOne = new Libro('Ready Player One', 'Sci-fi', 235, 'Ernest Cline');
-    const theCall = new Libro('The Raven', 'Thriller', 13, 'Edgar Alan Poe');
+    const theRaven = new Libro('The Raven', 'Thriller', 13, 'Edgar Alan Poe');
     const atomicHabits = new Libro('Atomic Habits', 'Self-Help', 350, 'James Clear');
     const emotional = new Libro('Emotional Intelligence', 'Education', 527, 'Daniel Goleman');
+    
     const manager = new Manage;
 
     //Execute 'all' function:
-    console.log(manager.all(libros));     
+    //console.log(manager.all(libros));     
     
     //Execute 'addBooks' function:
     manager.addBook(libros, girlsTrain);
     manager.addBook(libros, readyPlayerOne);
-    manager.addBook(libros, theCall);
+    manager.addBook(libros, theRaven);
     manager.addBook(libros, atomicHabits);
     manager.addBook(libros, emotional);
     
