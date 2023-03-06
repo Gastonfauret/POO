@@ -1,14 +1,16 @@
+import {Auto} from './claseAuto';
+
 const baseDeDatosAutos: string [] = [];
 
 export class RegistroAutomotor{
-    actualizacion(baseDeDatosAutos) {
+    actualizacion(baseDeDatosAutos: Auto) {
         console.log(baseDeDatosAutos);       
     } 
 
-    anadeAutos(baseDeDatosAutos, nuevoAuto: string) {
+    anadeAutos(baseDeDatosAutos, nuevoAuto: Auto) {
         if(baseDeDatosAutos.push(nuevoAuto)) {
             this.arrayAJason(baseDeDatosAutos)
-            console.log(`El Vehiculo "${nuevoAuto}" ha sido añadido a la base de datos`);
+            console.log(`El Vehiculo "${nuevoAuto.marca}" ha sido añadido a la base de datos`, baseDeDatosAutos);
         } else {
             console.log(`El vehiculo "${nuevoAuto}" no ha sido añadido a la base de datos`);
         }
@@ -58,4 +60,5 @@ export class RegistroAutomotor{
             });                
         }
     }
+    
 

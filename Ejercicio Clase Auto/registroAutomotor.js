@@ -1,18 +1,20 @@
 "use strict";
 exports.__esModule = true;
+exports.RegistroAutomotor = void 0;
+var baseDeDatosAutos = [];
 var RegistroAutomotor = /** @class */ (function () {
     function RegistroAutomotor() {
     }
-    RegistroAutomotor.prototype.manage = function (baseDeDatosAutos) {
+    RegistroAutomotor.prototype.actualizacion = function (baseDeDatosAutos) {
         console.log(baseDeDatosAutos);
     };
     RegistroAutomotor.prototype.anadeAutos = function (baseDeDatosAutos, nuevoAuto) {
         if (baseDeDatosAutos.push(nuevoAuto)) {
             this.arrayAJason(baseDeDatosAutos);
-            console.log("El Vehiculo \"".concat(nuevoAuto.name, "\" ha sido a\u00F1adido a la base de datos"));
+            console.log("El Vehiculo \"".concat(nuevoAuto.marca, "\" ha sido a\u00F1adido a la base de datos"), baseDeDatosAutos);
         }
         else {
-            console.log("El vehiculo \"".concat(nuevoAuto.name, "\" no ha sido a\u00F1adido a la base de datos"));
+            console.log("El vehiculo \"".concat(nuevoAuto, "\" no ha sido a\u00F1adido a la base de datos"));
         }
     };
     RegistroAutomotor.prototype.consultaBaseDeDatos = function (nombre, baseDeDatosAutos) {
@@ -22,7 +24,7 @@ var RegistroAutomotor = /** @class */ (function () {
             return autoEncontrado;
         }
         else {
-            console.log("\"".concat(nombre, "\" doesn't exist in the library"));
+            console.log("\"".concat(nombre, "\" no se encuentra en la base de datos"));
         }
     };
     RegistroAutomotor.prototype.modificaArchivo = function (nombre, baseDeDatosAutos, dato) {
@@ -59,4 +61,4 @@ var RegistroAutomotor = /** @class */ (function () {
     };
     return RegistroAutomotor;
 }());
-exports["default"] = RegistroAutomotor;
+exports.RegistroAutomotor = RegistroAutomotor;

@@ -1,5 +1,4 @@
 "use strict";
-//import RegistroAutomotor from "./registroAutomotor";
 exports.__esModule = true;
 exports.Auto = void 0;
 var Auto = /** @class */ (function () {

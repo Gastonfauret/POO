@@ -1,7 +1,5 @@
-//import {RegistroAutomotor} from "./registroAutomotor";
-
 export class Auto {
-    private marca: string;
+    public marca: string;
     private modelo: string;
     private motor: number;
     private patente: string;
