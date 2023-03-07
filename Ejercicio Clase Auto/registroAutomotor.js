@@ -1,6 +1,7 @@
 "use strict";
 exports.__esModule = true;
 exports.RegistroAutomotor = void 0;
+var fs = require("fs");
 var baseDeDatosAutos = [];
 var RegistroAutomotor = /** @class */ (function () {
     function RegistroAutomotor() {
@@ -11,53 +12,42 @@ var RegistroAutomotor = /** @class */ (function () {
     RegistroAutomotor.prototype.anadeAutos = function (baseDeDatosAutos, nuevoAuto) {
         if (baseDeDatosAutos.push(nuevoAuto)) {
             this.arrayAJason(baseDeDatosAutos);
-            console.log("El Vehiculo \"".concat(nuevoAuto.marca, "\" ha sido a\u00F1adido a la base de datos"), baseDeDatosAutos);
+            console.log("The car data has been successfully added.", nuevoAuto);
         }
         else {
-            console.log("El vehiculo \"".concat(nuevoAuto, "\" no ha sido a\u00F1adido a la base de datos"));
+            console.log("The car data has not been added.");
         }
     };
     RegistroAutomotor.prototype.consultaBaseDeDatos = function (nombre, baseDeDatosAutos) {
-        var autoEncontrado = baseDeDatosAutos.find(function (baseDeDatosAutos) { return baseDeDatosAutos.name === nombre; });
+        var autoEncontrado = baseDeDatosAutos.filter(function (baseDeDatosAutos) { return baseDeDatosAutos.nombre == nombre; });
         if (autoEncontrado) {
-            console.log("El vehiculo \"".concat(nombre, "\" se encuentra en la base de datos"));
-            return autoEncontrado;
+            console.log("The car you are looking for is in the database.");
         }
         else {
-            console.log("\"".concat(nombre, "\" no se encuentra en la base de datos"));
+            console.log("The required data were not found.");
         }
     };
-    RegistroAutomotor.prototype.modificaArchivo = function (nombre, baseDeDatosAutos, dato) {
-        var archivoModificado = this.consultaBaseDeDatos(nombre, baseDeDatosAutos);
-        if (archivoModificado) {
-            archivoModificado.nombre = dato;
-            console.log("The book \"".concat(nombre, "\" has been modified. Now, its called \"").concat(dato, "\""));
-        }
-        else {
-            console.log("The book has not been modified");
-        }
-    };
+    // modificaArchivo(nombre: string, baseDeDatosAutos, dato: string) {
+    //     let archivoModificado = this.consultaBaseDeDatos(nombre, baseDeDatosAutos);
+    //     if (archivoModificado) {
+    //         archivoModificado.marca = dato;
+    //         console.log(`The database has been modified: It can be find as: "${dato}".`);
+    //     } else {
+    //         console.log(`The database could not be modified`);                            
+    //     }
+    // }
     RegistroAutomotor.prototype.eliminaArchivo = function (nombre, baseDeDatosAutos) {
-        var archivoEliminado = baseDeDatosAutos.findIndex(function (baseDeDatosAutos) { return baseDeDatosAutos.name == nombre; });
-        if (archivoEliminado >= 0) {
-            baseDeDatosAutos.splice(archivoEliminado, 1);
-            console.log("El vehiculo \"".concat(nombre, "\" fue eliminado"));
-            console.log(baseDeDatosAutos);
-            return baseDeDatosAutos;
+        var archivoEliminado = baseDeDatosAutos.filter(function (element) { return element.nombre === nombre; });
+        if (archivoEliminado) {
+            console.log("The datafile has been deleted");
         }
         else {
-            return "El vehiculo ".concat(nombre, " no pudo ser eliminado");
+            return "The datafile could not be deleted";
         }
     };
     RegistroAutomotor.prototype.arrayAJason = function (baseDeDatosAutos) {
-        var fs = require('fs');
-        var file = './registro autos.json';
-        var data = JSON.stringify(baseDeDatosAutos);
-        fs.writeFile(file, data, function (error) {
-            if (error) {
-                return console.log(error);
-            }
-        });
+        var updateCar = JSON.stringify(baseDeDatosAutos);
+        fs.writeFileSync('./registro autos.json', updateCar, 'utf-8');
     };
     return RegistroAutomotor;
 }());

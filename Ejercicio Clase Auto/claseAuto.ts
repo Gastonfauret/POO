@@ -1,5 +1,5 @@
 export class Auto {
-    public marca: string;
+    private marca: string;
     private modelo: string;
     private motor: number;
     private patente: string;
