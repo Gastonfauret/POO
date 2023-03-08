@@ -4,49 +4,53 @@ import * as fs from "fs";
 const baseDeDatosAutos: string [] = [];
 
 export class RegistroAutomotor{
-    actualizacion(baseDeDatosAutos: Auto) {
-        console.log(baseDeDatosAutos);       
+    update(dataBase: Auto) {
+        console.log(dataBase);       
     } 
 
-    anadeAutos(baseDeDatosAutos, nuevoAuto: Auto) {
-        if(baseDeDatosAutos.push(nuevoAuto)) {
-            this.arrayAJason(baseDeDatosAutos)
+    addCar(dataBase, nuevoAuto: Auto) {
+        if(dataBase.push(nuevoAuto)) {
             console.log(`The car data has been successfully added.`, nuevoAuto);
         } else {
             console.log(`The car data has not been added.`);
         }
     }
 
-    consultaBaseDeDatos(nombre: string, baseDeDatosAutos) {
-        const autoEncontrado = baseDeDatosAutos.filter(baseDeDatosAutos => baseDeDatosAutos.nombre == nombre)
-        if (autoEncontrado) {
-            console.log(`The car you are looking for is in the database.`);
-            } else {
-            console.log(`The required data were not found.`);
+    consultDataBase(auto:string, dataBase:Auto[]) {
+        let foundCar: Auto[] = dataBase.filter((car: any) => car.marca === auto);
+        if(foundCar.length) {
+            console.log(`The datafile of '${auto}' has been found.`);
+            console.log(foundCar);
+            // return foundCar;
+        } else {
+            console.log(`The datafile of '${auto}' isn't in the datafile. `);
         }
     }
 
-    // modificaArchivo(nombre: string, baseDeDatosAutos, dato: string) {
-    //     let archivoModificado = this.consultaBaseDeDatos(nombre, baseDeDatosAutos);
-    //     if (archivoModificado) {
-    //         archivoModificado.marca = dato;
-    //         console.log(`The database has been modified: It can be find as: "${dato}".`);
-    //     } else {
-    //         console.log(`The database could not be modified`);                            
-    //     }
-    // }
-
-    eliminaArchivo(nombre: string, baseDeDatosAutos) {
-        const archivoEliminado = baseDeDatosAutos.filter(element => element.nombre === nombre);
-        if(archivoEliminado){  
-            console.log(`The datafile has been deleted`);
-            } else {
-                return `The datafile could not be deleted`;
+    deleteFile(auto:string, array:Auto[]) {
+        let index: number = array.length;
+        while (index > 0) {
+            const deleteCar: number = array.findIndex((car: any) => car.marca === auto);
+            if (deleteCar >= 0) {
+            array.splice(deleteCar, 1);
+            console.log(`The datafile of '${auto}' has been deleted sucesfully.`);
+            
             }
-        }
+        index--;
+    }
+}
 
-    arrayAJason(baseDeDatosAutos:Auto[]) {
-        const updateCar= JSON.stringify(baseDeDatosAutos);
+    // deleteFile(nombre: Auto, dataBase) {
+    //     const archivoEliminado = dataBase.filter(element => element.nombre === nombre);
+    //     if(archivoEliminado){  
+    //         console.log(`The datafile has been deleted`);
+    //         } else {
+    //             return `The datafile could not be deleted`;
+    //         }
+    //     }
+
+    arrayAJason(dataBase:Auto[]) {
+        const updateCar= JSON.stringify(dataBase);
         fs.writeFileSync('./registro autos.json', updateCar, 'utf-8')
         }
     }
